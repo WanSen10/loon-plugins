@@ -1,7 +1,8 @@
-#!name=X 信息流去广告（实验版）
-#!desc=过滤 X/Twitter JSON 信息流中的推广条目。脚本自动远程加载，需开启 MITM；优先用于网页版，官方 App 需实测。
+#!name=X 网页版信息流去广告（实验版）
+#!desc=仅面向 X/Twitter 网页版的推广条目过滤。脚本自动远程加载，需开启 MITM；不支持官方 App 去广告。
 #!author=Local
 #!date=2026-10-25
+#!version=0.1.1
 #!tag=去广告,X,Twitter
 #!homepage=https://github.com/WanSen10/loon-plugins
 #!raw-url=https://raw.githubusercontent.com/WanSen10/loon-plugins/main/X-AdBlock.plugin
@@ -10,7 +11,8 @@
 # 本插件只过滤有明确推广标识的时间线条目，不承诺拦截全部广告。
 
 [Script]
-http-response ^https://(?:(?:api|www|mobile)\.)?(?:x|twitter)\.com/(?:(?:i/api/)?graphql/|(?:i/api/)?2/timeline/) script-path=https://raw.githubusercontent.com/WanSen10/loon-plugins/main/x-adblock.js, requires-body=true, timeout=10, tag=X信息流广告过滤, enable=true
+http-response ^https://(?:(?:www|mobile)\.)?(?:x|twitter)\.com/i/api/(?:graphql/|2/timeline/) script-path=https://raw.githubusercontent.com/WanSen10/loon-plugins/main/x-adblock.js, requires-body=true, timeout=10, tag=X信息流广告过滤, enable=true
 
 [MITM]
-hostname = x.com, www.x.com, mobile.x.com, api.x.com, twitter.com, www.twitter.com, mobile.twitter.com, api.twitter.com
+# 不再主动将官方 App 的 api.x.com / api.twitter.com 加入解密。
+hostname = x.com, www.x.com, mobile.x.com, twitter.com, www.twitter.com, mobile.twitter.com
