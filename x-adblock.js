@@ -6,7 +6,7 @@
   "use strict";
   var result = {};
   try {
-    var route = /^https:\/\/(?:(?:api|www|mobile)\.)?(?:x|twitter)\.com\/(?:(?:i\/api\/)?graphql\/|(?:i\/api\/)?2\/timeline\/)/;
+    var route = /^https:\/\/(?:(?:www|mobile)\.)?(?:x|twitter)\.com\/i\/api\/(?:graphql\/|2\/timeline\/)/;
     var body = typeof $response !== "undefined" && $response.body;
     if (typeof $request !== "undefined" && route.test($request.url) &&
         typeof body === "string" && body.length > 0) {
