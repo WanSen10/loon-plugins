@@ -76,9 +76,11 @@ check('unknown schema and errors pass through', () => {
 });
 check('plugin and script route matching agree', () => {
   const body = JSON.stringify(wrap([tweet('promoted-1'), cursor]));
-  const yes = [url, 'https://api.twitter.com/graphql/id/HomeTimeline', 'https://api.x.com/2/timeline/home.json',
+  const yes = [url,
     'https://mobile.twitter.com/i/api/graphql/id/SearchTimeline', 'https://www.x.com/i/api/2/timeline/home.json'];
-  const no = ['https://x.com.evil.test/i/api/graphql/id/a', 'https://evil.test/i/api/graphql/id/a',
+  const no = ['https://api.twitter.com/graphql/id/HomeTimeline', 'https://api.x.com/2/timeline/home.json',
+    'https://api.twitter.com/i/api/graphql/id/HomeTimeline', 'https://api.x.com/i/api/graphql/id/HomeTimeline',
+    'https://x.com.evil.test/i/api/graphql/id/a', 'https://evil.test/i/api/graphql/id/a',
     'https://x.com/i/api/graphqlish/a', 'https://x.com/i/api/1.1/account/settings.json', 'https://pbs.twimg.com/a.jpg'];
   for (const candidate of yes) {
     assert.equal(pattern.test(candidate), true, candidate);
